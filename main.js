@@ -1,5 +1,9 @@
 var time = 270;
 var food = 35;
+var score = 0;
+var high_score = localStorage.getItem("high_score");
+document.getElementsByClassName("score_board")[0].firstElementChild.innerHTML = `High Score ${high_score}`
+
 document.getElementsByClassName('item')[food-1].innerHTML = '$';
 
 
@@ -66,6 +70,7 @@ function check(num)
 
 // assign array value for next move (right 1 || left -1 || up 20 ||down -20 )
 function assign(num) {
+    console.log("assign")
     document.getElementsByClassName('item')[snake[0]-1].innerHTML = ""
 
 
@@ -143,7 +148,18 @@ function color_(remove)
          snake[snake.length] = remove;
          item[food - 1].innerHTML = "";
          food = Math.floor(Math.random() * (400 - 1) + 1);
-        item[food-1].innerHTML = '$';
+         item[food - 1].innerHTML = '$';
+         score += 3
+         document.getElementsByClassName("score_board")[0].lastElementChild.innerHTML = `Your Score ${score}`
+         if (score > high_score)
+         {
+             localStorage.setItem("high_score", score)
+             document.getElementsByClassName("score_board")[0].style.flexDirection = "column-reverse"
+             document.getElementsByClassName("score_board")[0].style.background = "black"
+             document.getElementsByClassName("score_board")[0].style.color = "white"
+             
+             }
+         
 
      }
      else {
@@ -161,12 +177,15 @@ function start() {
 
 // event sanke movement key - up ,down,left,right
 window.addEventListener("keydown", (e) => {
+ 
     switch(e.key)
     {
         case "ArrowDown": if (dir != "up") { dir = "down"; } break;
         case "ArrowUp":if(dir!="down") dir = "up"; break;
         case "ArrowLeft":if(dir!="right") dir = "left"; break;
         case "ArrowRight": if (dir != "left") { dir = "right"; } break;
+        case "Escape": stop('resume'); break;
+
         
        }
     
@@ -176,17 +195,22 @@ window.addEventListener("keydown", (e) => {
 // stop the snake run (resume || dead)
 function stop(data)
 {
+
+    document.getElementsByClassName('navigation')[0].style.zIndex= 0
     clearInterval(runner);
     if (data == "resume")
     {
         clearInterval(runner);
-        console.log("resume");l
+        document.getElementsByClassName('navigation')[0].children[1].innerHTML = "resume";
+        document.getElementsByClassName('navigation')[0].children[0].innerHTML = "Pause";
+        
    
     }
     else if (data == 'dead')
     {
-        clearInterval(runner);
-        console.log("dead");
+    clearInterval(runner);
+    document.getElementsByClassName('navigation')[0].firstElementChild.innerHTML="Snake dead!"
+        document.getElementsByClassName('navigation')[0].children[1].innerHTML = `your score ${score}`;
         }
         
         
@@ -215,3 +239,15 @@ function right()
     if(dir != "left")
     dir = "right"
 }
+
+//evnet for navigation
+
+document.getElementsByClassName('navigation')[0].children[1].addEventListener("click", () => {
+    if (document.getElementsByClassName('navigation')[0].children[1].innerHTML = "resume")
+    {
+        document.getElementsByClassName('navigation')[0].style.zIndex = -1;
+        start()
+        
+        }
+    
+})
