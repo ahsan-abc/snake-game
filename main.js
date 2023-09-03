@@ -2,6 +2,7 @@ var time = 270;
 var food = 35;
 var score = 0;
 var high_score = localStorage.getItem("high_score");
+var press = true;
 document.getElementsByClassName("score_board")[0].firstElementChild.innerHTML = `High Score ${high_score}`
 
 document.getElementsByClassName('item')[food-1].innerHTML = '$';
@@ -166,7 +167,8 @@ function color_(remove)
         
         item[remove - 1].style.background= "white";
          
-      }
+    }
+    press = true;
 }
 
 
@@ -177,17 +179,17 @@ function start() {
 
 // event sanke movement key - up ,down,left,right
 window.addEventListener("keydown", (e) => {
- 
-    switch(e.key)
-    {
-        case "ArrowDown": if (dir != "up") { dir = "down"; } break;
-        case "ArrowUp":if(dir!="down") dir = "up"; break;
-        case "ArrowLeft":if(dir!="right") dir = "left"; break;
-        case "ArrowRight": if (dir != "left") { dir = "right"; } break;
-        case "Escape": stop('resume'); break;
+    if (press == true) {
+        switch (e.key) {
+            case "ArrowDown": if (dir != "up") { dir = "down"; press = false } break;
+            case "ArrowUp": if (dir != "down") { dir = "up"; press = false } break;
+            case "ArrowLeft": if (dir != "right") { dir = "left"; press = false } break;
+            case "ArrowRight": if (dir != "left") { dir = "right"; press = false } break;
+            case "Escape": stop('resume'); break;
 
         
-       }
+        }
+    }
     
 })
 
@@ -221,22 +223,22 @@ function stop(data)
 
 function up()
 {
-    if(dir != "down")
+    if(dir != "down" && press == true)
     dir = "up"
 }
 function down()
 {
-    if(dir != "up")
+    if(dir != "up" && press == true)
     dir = "down"
 }
 function left()
 {
-    if(dir != "right")
+    if(dir != "right" && press == true)
     dir = "left"
 }
 function right()
 {
-    if(dir != "left")
+    if(dir != "left" && press == true)
     dir = "right"
 }
 
