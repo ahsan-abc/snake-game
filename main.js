@@ -135,7 +135,7 @@ function color_(remove)
 
 
         item[snake[i] - 1].style.background = `rgb(255,0,0,${last})`;
-        last = last - 0.03;
+        last = last - 0.01;
      
     }
     item[snake[0]-1].innerHTML = ":"
