@@ -1,0 +1,58 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+.menu
+{
+    width: 100%;
+    height: 100vh;
+    background-color: gold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction:column ;
+}
+
+.menu>p
+{
+  user-select: none;
+
+    width: 200px;
+    height: 30px;
+    margin: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 2px solid white;
+    box-shadow: -5px 5px 3px black , -0px 5px 3px black , -5px 0px 3px black;
+
+   transition: all noraml 1s  ;
+
+}
+
+
+.menu>p>span
+{
+    width: 70%;
+    text-align: center;
+}
+
+.menu>p:hover
+{
+    background: whitesmoke;
+
+}
+
+.menu>p>button
+{
+    background-color: rgba(0, 0, 0, 0.374);
+    opacity: 50%;
+    font-weight: 900;
+    padding: 5px;
+    border-radius: 41%;
+    border: 0;
+}
+
+
+
