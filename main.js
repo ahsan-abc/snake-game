@@ -198,11 +198,13 @@ window.addEventListener("keydown", (e) => {
 function stop(data)
 {
 
-    document.getElementsByClassName('navigation')[0].style.zIndex= 0
-    clearInterval(runner);
+
+
     if (data == "resume")
     {
         clearInterval(runner);
+        document.getElementsByClassName('navigation')[0].style.zIndex= 0
+
         document.getElementsByClassName('navigation')[0].children[1].innerHTML = "resume";
         document.getElementsByClassName('navigation')[0].children[0].innerHTML = "Pause";
         
@@ -210,9 +212,29 @@ function stop(data)
     }
     else if (data == 'dead')
     {
-    clearInterval(runner);
+        
+        clearInterval(runner);
+
+        
     document.getElementsByClassName('navigation')[0].firstElementChild.innerHTML="Snake dead!"
         document.getElementsByClassName('navigation')[0].children[1].innerHTML = `your score ${score}`;
+
+        var it = document.getElementsByClassName('item');
+
+        it[186].innerHTML = "G"
+	it [187].innerHTML = "A"
+        it [188].innerHTML = "M"
+        it [189].innerHTML = "E"
+   
+        it [191].innerHTML = " O"
+        it [192].innerHTML = "V"
+         it [193].innerHTML = "E"
+	 it[194].innerHTML = "R"
+	    setTimeout(() => {
+    document.getElementsByClassName('navigation')[0].style.zIndex= 0
+            
+        }, 3000)
+
         }
         
         
